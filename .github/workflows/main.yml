@@ -5,9 +5,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -15,21 +15,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-    - name: Build with Ant
-      run: ant -noinput -buildfile build.xml
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.0.0
-      with:
-        name: JARUL
-        path: "dist/lab8.jar"
-    - name: Documentatie
-      uses: actions/upload-artifact@v3.0.0
-      with:
-        name: JAVADOC
-        path: "javadoc"
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Ant
+        run: ant -noinput -buildfile build.xml
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          # Artifact name
+          name: lab8.jar
+          # Destination path
+          path: dist/lab8.jar
+      - name: Creates a JavaDoc
+        run:  ant -noinput -buildfile build.xml javadoc
+      - name: Upload javadoc
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: index.html
+          path: javadoc/index.html
