@@ -28,3 +28,8 @@ jobs:
       with:
         name: JARUL
         path: "${dist}/${ant.project.name}.jar"
+    - name: Documentatie
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: JAVADOC
+        path: "${javadoc}/index.html"
