@@ -27,9 +27,9 @@ jobs:
       uses: actions/upload-artifact@v3.0.0
       with:
         name: JARUL
-        path: "${dist}/${ant.project.name}.jar"
+        path: "dist/lab8.jar"
     - name: Documentatie
       uses: actions/upload-artifact@v3.0.0
       with:
         name: JAVADOC
-        path: "${javadoc}/index.html"
+        path: "javadoc"
